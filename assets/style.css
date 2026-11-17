@@ -171,3 +171,14 @@ a,button{-webkit-tap-highlight-color:transparent}
 .gite+.gite{margin-top:72px}
 .actions.left{justify-content:flex-start;margin:8px 0 0}
 h2.sec{scroll-margin-top:110px}
+
+/* ---------- Plannings : photo de rappel ---------- */
+.plancards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:40px 0 80px}
+.pcard{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
+.pcard:hover{transform:translateY(-4px)}
+.pcard img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.pcard span{display:block;padding:16px 18px 18px;font:700 1.25rem/1.15 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.plan-head{display:flex;align-items:center;gap:16px;margin:40px 0 8px;scroll-margin-top:110px}
+.plan-head img{width:104px;height:72px;object-fit:cover;border-radius:12px;box-shadow:var(--shadow);flex:none}
+.plan-head h2.sec{margin:0}
+@media(max-width:900px){.plancards{margin:28px 0 56px;gap:18px}.plan-head{margin-top:28px;gap:12px}.plan-head img{width:84px;height:58px}}
