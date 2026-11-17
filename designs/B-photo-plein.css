@@ -1,0 +1,5 @@
+
+.home-hero{position:relative;min-height:78vh;display:grid;place-items:center;padding:60px 20px;background:linear-gradient(rgba(24,69,44,.55),rgba(24,69,44,.75)),url(../assets/bouchardiere.jpg) center 40%/cover}
+.home-hero img{width:min(480px,90%);background:var(--bg);border-radius:50%;padding:18px;mix-blend-mode:normal;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.nav{position:absolute;left:0;right:0;background:transparent;border:0}.nav a{color:#fff}.nav a:hover{background:rgba(255,255,255,.18);color:#fff}.nav a[aria-current=page]{background:var(--bg);color:var(--ink)}
+.cards{margin-top:-90px;position:relative;z-index:2}
