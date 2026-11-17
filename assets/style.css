@@ -73,3 +73,40 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 
 .video{aspect-ratio:16/9;max-width:900px;margin:0 auto 80px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
 .video iframe{width:100%;height:100%;border:0;display:block}
+
+/* ---------- Animations ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.88) rotate(-2deg)}to{opacity:1;transform:none}}
+@keyframes drift{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.nav{animation:rise .6s both}
+.home-hero img{animation:pop .9s cubic-bezier(.2,.8,.2,1) .15s both}
+.home-hero{animation:drift 2.4s ease-out both}
+.home-hero img{will-change:transform}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .card.rv{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.js .card.rv.in:hover{transform:translateY(-6px)}
+.card{background-size:100%;transition:transform .3s,background-size .6s}
+.card:hover{background-size:108%}
+.card span{transition:transform .3s}.card:hover span{transform:translateX(6px)}
+.photo img{transition:transform .6s}.photo:hover img{transform:scale(1.02)}
+.btn{transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+.btn:hover{box-shadow:0 10px 20px -10px rgba(24,69,44,.6)}
+.btn:active{transform:translateY(0) scale(.98)}
+.nav a{position:relative}
+.features li{transition:padding-left .25s}.features li:hover{padding-left:36px}
+.title hr{transform-origin:left;animation:grow .8s .3s both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:none}}
+.contact li{transition:transform .25s,background .25s}.contact li:hover{transform:translateY(-3px);background:#2a6444}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+
+/* ---------- Conditions générales & version ---------- */
+.cond{padding-bottom:80px}.cond section,.cond .maj{max-width:780px}
+.cond section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin:16px 0}
+.cond h2{font-size:1.6rem;margin-bottom:8px;color:var(--ink)}
+.cond p,.cond li{margin:0 0 8px}.cond ul{margin:0;padding-left:20px}
+.cond .maj{color:var(--muted);font-size:.9rem;margin-top:24px}
+.legal{margin-top:36px;padding-top:20px;border-top:1px solid #2a6444;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:.9rem;color:#cfd8c0}
+.legal a{color:var(--bg);text-decoration:none;border-bottom:1px solid var(--olive)}
+.legal a:hover{color:var(--olive)}
