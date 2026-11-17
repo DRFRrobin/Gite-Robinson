@@ -136,3 +136,5 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 /* Bouteillerie : maison / studio */
 .text h2.sec{margin:0 0 14px;font-size:2.2rem}
 .gite+.gite{margin-top:72px}
+.actions.left{justify-content:flex-start;margin:8px 0 0}
+h2.sec{scroll-margin-top:110px}
