@@ -1,7 +1,0 @@
-
-:root{--bg:#f6f3fb;--surface:#fff;--ink:#2b2438;--muted:#6f6783;--accent:#7a5cc7;--accent-ink:#fff;--line:#e3dcf2;--radius:28px;--shadow:0 20px 50px -24px rgba(122,92,199,.5)}
-body{font-family:'Inter',sans-serif}
-h1,h2,h3{font-family:'Fraunces',serif;font-style:italic;font-weight:400}
-.nav{background:transparent;border:0}.nav a{background:#fff;margin:2px;box-shadow:0 2px 8px -4px rgba(0,0,0,.2)}
-.title{text-align:center}.title hr{margin:20px auto 0;border-top:3px dotted var(--accent)}
-.features li::before{border-radius:4px;transform:rotate(45deg)}

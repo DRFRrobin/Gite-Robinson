@@ -1,0 +1,10 @@
+
+main{background:radial-gradient(circle at 1px 1px,rgba(154,171,90,.3) 1px,transparent 0)0 0/22px 22px;max-width:none;padding:0 max(20px,calc((100% - 1040px)/2))}
+.nav{background:var(--ink);border:0}.nav a{color:var(--bg)}.nav a:hover{background:#1f5538;color:#fff}.nav a[aria-current=page]{background:var(--olive);color:var(--ink)}
+.home-hero img{width:min(520px,100%)}
+.cards{gap:36px}
+.card{display:block;min-height:0;background:var(--surface)!important;border:4px solid var(--ink);border-radius:14px;color:var(--ink);box-shadow:8px 8px 0 var(--olive);padding:14px}
+.card::before{display:none}
+.card::after{content:"";display:block;aspect-ratio:4/3;border-radius:6px;background:var(--img) center/cover}
+.card span{display:block;padding:18px 6px 6px;text-align:center}
+.card:hover{transform:translate(-3px,-3px);box-shadow:12px 12px 0 var(--olive)}
