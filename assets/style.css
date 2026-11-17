@@ -113,3 +113,16 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 ::view-transition-group(nav){animation-duration:.3s}
 ::view-transition-old(nav),::view-transition-new(nav){animation:none;mix-blend-mode:normal}
 @media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+/* ---------- Logo en haut à gauche ---------- */
+.nav .wrap{position:relative;min-height:76px}
+.nav .brand{position:absolute;left:20px;top:50%;transform:translateY(-50%);padding:0!important;background:none!important;line-height:0;transition:transform .3s}
+.nav .brand:hover{transform:translateY(-50%) scale(1.06)}
+.nav .brand img{height:64px;width:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.home-hero{min-height:56vh;padding:0}
+@media(max-width:900px){
+  .nav .wrap{flex-direction:column;gap:2px;padding-top:8px}
+  .nav .brand{position:static;transform:none}.nav .brand:hover{transform:scale(1.06)}
+  .nav .brand img{height:52px}
+  .home-hero{min-height:46vh}
+}
