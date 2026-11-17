@@ -63,13 +63,66 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .plan{background:#fff}
 
 /* accueil : photo plein écran + logo contouré */
-.home-hero{position:relative;min-height:82vh;display:grid;place-items:center;padding:110px 20px 150px;background:linear-gradient(rgba(24,69,44,.55),rgba(24,69,44,.78)),url(bouchardiere.jpg) center 40%/cover}
+.home-hero{position:relative;min-height:82vh;display:grid;place-items:center end;padding:110px max(20px,calc((100% - 1040px)/2)) 150px;background:linear-gradient(rgba(24,69,44,.55),rgba(24,69,44,.78)),url(bouchardiere.jpg) center 40%/cover}
 .home-hero img{width:min(560px,92%);height:auto;display:block;filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))}
 .home .nav{position:absolute;left:0;right:0;background:transparent;border:0;backdrop-filter:none}
 .home .nav a{color:#fff}.home .nav a:hover{background:rgba(255,255,255,.18);color:#fff}
 .home .nav a[aria-current=page]{background:var(--bg);color:var(--ink)}
 .home .cards{margin-top:-110px;position:relative;z-index:2}
-@media(max-width:600px){.home-hero{padding-top:130px;min-height:70vh}}
+@media(max-width:780px){.home-hero{place-items:center;padding-top:130px;min-height:70vh}}
 
 .video{aspect-ratio:16/9;max-width:900px;margin:0 auto 80px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
 .video iframe{width:100%;height:100%;border:0;display:block}
+
+/* ---------- Animations ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.88) rotate(-2deg)}to{opacity:1;transform:none}}
+@keyframes drift{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.nav{animation:rise .6s both}
+.home-hero img{animation:pop .9s cubic-bezier(.2,.8,.2,1) .15s both}
+.home-hero{animation:drift 2.4s ease-out both}
+.home-hero img{will-change:transform}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .card.rv{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.js .card.rv.in:hover{transform:translateY(-6px)}
+.card{background-size:cover;background-repeat:no-repeat;transition:transform .3s}
+.card span{transition:transform .3s}.card:hover span{transform:translateX(6px)}
+.photo img{transition:transform .6s}.photo:hover img{transform:scale(1.02)}
+.btn{transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+.btn:hover{box-shadow:0 10px 20px -10px rgba(24,69,44,.6)}
+.btn:active{transform:translateY(0) scale(.98)}
+.nav a{position:relative}
+.features li{transition:padding-left .25s}.features li:hover{padding-left:36px}
+.title hr{transform-origin:left;animation:grow .8s .3s both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:none}}
+.contact li{transition:transform .25s,background .25s}.contact li:hover{transform:translateY(-3px);background:#2a6444}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+
+/* ---------- Version ---------- */
+.legal{margin-top:36px;padding-top:20px;border-top:1px solid #2a6444;text-align:right;font-size:.9rem;color:#cfd8c0}
+
+/* ---------- Transitions entre les pages ---------- */
+@view-transition{navigation:auto}
+@keyframes page-out{to{opacity:0;transform:translateX(-40px)}}
+@keyframes page-in{from{opacity:0;transform:translateX(40px)}}
+::view-transition-old(root){animation:.28s ease-in both page-out}
+::view-transition-new(root){animation:.4s ease-out .05s both page-in}
+.nav{view-transition-name:nav}
+::view-transition-group(nav){animation-duration:.3s}
+::view-transition-old(nav),::view-transition-new(nav){animation:none;mix-blend-mode:normal}
+@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+/* ---------- Logo en haut à gauche ---------- */
+.nav .wrap{position:relative;min-height:76px}
+.nav .brand{position:absolute;left:20px;top:50%;transform:translateY(-50%);padding:0!important;background:none!important;line-height:0;transition:transform .3s}
+.nav .brand:hover{transform:translateY(-50%) scale(1.06)}
+.nav .brand img{height:64px;width:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+.home-hero{min-height:56vh;padding:0}
+@media(max-width:900px){
+  .nav .wrap{flex-direction:column;gap:2px;padding-top:8px}
+  .nav .brand{position:static;transform:none}.nav .brand:hover{transform:scale(1.06)}
+  .nav .brand img{height:52px}
+  .home-hero{min-height:46vh}
+}
