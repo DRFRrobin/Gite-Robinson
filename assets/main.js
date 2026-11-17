@@ -3,7 +3,7 @@
   var d=document.documentElement;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)) return;
   d.classList.add('js');
-  var els=document.querySelectorAll('.reveal,.gite .photo,.gite .text,.features li,.card,.plan,.video,.contact li,.actions .btn,.linkcards .btn,.title h1,.cond section');
+  var els=document.querySelectorAll('.reveal,.gite .photo,.gite .text,.features li,.card,.plan,.video,.contact li,.actions .btn,.linkcards .btn,.title h1');
   els.forEach(function(e,i){e.classList.add('rv');});
   var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(e){

@@ -101,12 +101,5 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .contact li{transition:transform .25s,background .25s}.contact li:hover{transform:translateY(-3px);background:#2a6444}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 
-/* ---------- Conditions générales & version ---------- */
-.cond{padding-bottom:80px}.cond section,.cond .maj{max-width:780px}
-.cond section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin:16px 0}
-.cond h2{font-size:1.6rem;margin-bottom:8px;color:var(--ink)}
-.cond p,.cond li{margin:0 0 8px}.cond ul{margin:0;padding-left:20px}
-.cond .maj{color:var(--muted);font-size:.9rem;margin-top:24px}
-.legal{margin-top:36px;padding-top:20px;border-top:1px solid #2a6444;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:.9rem;color:#cfd8c0}
-.legal a{color:var(--bg);text-decoration:none;border-bottom:1px solid var(--olive)}
-.legal a:hover{color:var(--olive)}
+/* ---------- Version ---------- */
+.legal{margin-top:36px;padding-top:20px;border-top:1px solid #2a6444;text-align:right;font-size:.9rem;color:#cfd8c0}
