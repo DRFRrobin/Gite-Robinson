@@ -1,6 +1,8 @@
 // Animations d'apparition au défilement (sans effet si l'utilisateur préfère moins d'animations)
 (function(){
-  var d=document.documentElement;
+  var d=document.documentElement,nav=document.querySelector('.nav');
+  function sc(){if(nav)nav.classList.toggle('scrolled',window.scrollY>30);}
+  sc();addEventListener('scroll',sc,{passive:true});
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)) return;
   d.classList.add('js');
   var els=document.querySelectorAll('.reveal,.gite .photo,.gite .text,.features li,.card,.plan,.video,.contact li,.actions .btn,.linkcards .btn,.title h1');
