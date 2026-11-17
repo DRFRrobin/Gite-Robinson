@@ -15,6 +15,7 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 | `planning.html` | Choix du planning |
 | `planning-bouchardiere.html` | Calendrier et tarifs de la Bouchardière |
 | `planning-bouteillerie.html` | Calendriers et tarifs de la Bouteillerie |
+| `docs/guide-du-site.pdf` | Guide complet du site (fonctionnement, modification, mise en ligne) |
 
 ## Structure
 
