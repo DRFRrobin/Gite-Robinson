@@ -63,13 +63,13 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .plan{background:#fff}
 
 /* accueil : photo plein écran + logo contouré */
-.home-hero{position:relative;min-height:82vh;display:grid;place-items:center;padding:110px 20px 150px;background:linear-gradient(rgba(24,69,44,.55),rgba(24,69,44,.78)),url(bouchardiere.jpg) center 40%/cover}
+.home-hero{position:relative;min-height:82vh;display:grid;place-items:center end;padding:110px max(20px,calc((100% - 1040px)/2)) 150px;background:linear-gradient(rgba(24,69,44,.55),rgba(24,69,44,.78)),url(bouchardiere.jpg) center 40%/cover}
 .home-hero img{width:min(560px,92%);height:auto;display:block;filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))}
 .home .nav{position:absolute;left:0;right:0;background:transparent;border:0;backdrop-filter:none}
 .home .nav a{color:#fff}.home .nav a:hover{background:rgba(255,255,255,.18);color:#fff}
 .home .nav a[aria-current=page]{background:var(--bg);color:var(--ink)}
 .home .cards{margin-top:-110px;position:relative;z-index:2}
-@media(max-width:600px){.home-hero{padding-top:130px;min-height:70vh}}
+@media(max-width:780px){.home-hero{place-items:center;padding-top:130px;min-height:70vh}}
 
 .video{aspect-ratio:16/9;max-width:900px;margin:0 auto 80px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
 .video iframe{width:100%;height:100%;border:0;display:block}
@@ -103,3 +103,14 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 
 /* ---------- Version ---------- */
 .legal{margin-top:36px;padding-top:20px;border-top:1px solid #2a6444;text-align:right;font-size:.9rem;color:#cfd8c0}
+
+/* ---------- Transitions entre les pages ---------- */
+@view-transition{navigation:auto}
+@keyframes page-out{to{opacity:0;transform:translateX(-40px)}}
+@keyframes page-in{from{opacity:0;transform:translateX(40px)}}
+::view-transition-old(root){animation:.28s ease-in both page-out}
+::view-transition-new(root){animation:.4s ease-out .05s both page-in}
+.nav{view-transition-name:nav}
+::view-transition-group(nav){animation-duration:.3s}
+::view-transition-old(nav),::view-transition-new(nav){animation:none;mix-blend-mode:normal}
+@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
