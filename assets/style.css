@@ -122,15 +122,48 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .nav.scrolled .brand img{height:60px}
 .title{padding-top:120px}
 .home-hero{min-height:62vh;padding:0}
+.links{display:contents}
+.burger{display:none}
+html{-webkit-text-size-adjust:100%}
+a,button{-webkit-tap-highlight-color:transparent}
 @media(max-width:900px){
-  .nav .wrap{flex-direction:column;gap:2px;padding-top:8px}
-  .nav .brand{position:static}
-  .nav .brand img{height:110px}
-  .nav.scrolled .brand img{height:48px}
-  .title{padding-top:40px}
-  .home-hero{min-height:330px}
-  .home .cards{margin-top:-30px}
+  /* barre compacte : logo à gauche, bouton menu à droite */
+  .nav .wrap{flex-direction:row;justify-content:space-between;align-items:center;min-height:64px;padding:6px 16px;gap:0}
+  .nav .brand{position:static;margin:0}
+  .nav .brand img{height:52px}
+  .nav.scrolled .brand img{height:40px}
+  .burger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:48px;height:48px;padding:0;border:0;background:none;cursor:pointer;border-radius:12px}
+  .burger span{display:block;width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .nav.open .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .nav.open .burger span:nth-child(2){opacity:0}
+  .nav.open .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:4px;padding:8px 16px 16px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 30px -22px rgba(24,69,44,.6)}
+  .nav.open .links{display:flex;animation:rise .25s both}
+  .links a{display:block;padding:14px 16px;font-size:17px;border-radius:12px;color:var(--ink)}
+  /* accueil : même barre que les autres pages */
+  .home .nav{position:sticky;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .home .nav .links a{color:var(--ink)}
+  .home .nav .links a:hover{background:var(--line);color:var(--ink)}
+  .home .nav .links a[aria-current=page]{background:var(--accent);color:var(--accent-ink)}
+  .home-hero{min-height:240px}
+  .home .cards{margin-top:-40px;gap:18px}
+  .title{padding-top:32px}
+  .title h1{font-size:2.3rem}
+  .card{min-height:260px}
+  .gite{margin:24px 0;gap:20px}
+  .gite+.gite{margin-top:44px}
+  .actions{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:56px}
+  .actions .btn{text-align:center;padding:15px 20px}
+  .actions.left{margin-bottom:0}
+  .features li{padding-top:13px;padding-bottom:13px}
+  .features li:hover{padding-left:30px}
+  .plan{padding:12px;-webkit-overflow-scrolling:touch}
+  .contact li{padding:16px}
+  .video{margin-bottom:48px;border-radius:12px}
+  footer{padding:40px 0 32px}
+  .legal{margin-top:28px}
 }
+@supports(padding:max(0px)){@media(max-width:900px){.nav .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}}}
 @media(prefers-reduced-motion:reduce){.nav .brand img{transition:none}}
 
 /* Bouteillerie : maison / studio */
@@ -138,3 +171,14 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .gite+.gite{margin-top:72px}
 .actions.left{justify-content:flex-start;margin:8px 0 0}
 h2.sec{scroll-margin-top:110px}
+
+/* ---------- Plannings : photo de rappel ---------- */
+.plancards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:40px 0 80px}
+.pcard{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
+.pcard:hover{transform:translateY(-4px)}
+.pcard img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.pcard span{display:block;padding:16px 18px 18px;font:700 1.25rem/1.15 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.plan-head{display:flex;align-items:center;gap:16px;margin:40px 0 8px;scroll-margin-top:110px}
+.plan-head img{width:104px;height:72px;object-fit:cover;border-radius:12px;box-shadow:var(--shadow);flex:none}
+.plan-head h2.sec{margin:0}
+@media(max-width:900px){.plancards{margin:28px 0 56px;gap:18px}.plan-head{margin-top:28px;gap:12px}.plan-head img{width:84px;height:58px}}

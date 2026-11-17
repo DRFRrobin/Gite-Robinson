@@ -3,7 +3,7 @@
 Site vitrine des gîtes **La Bouchardière** et **La Bouteillerie** (Gizeux).
 Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de build.
 
-**Version actuelle : V1.1**
+**Version actuelle : V1.3**
 
 ## Pages
 
@@ -57,13 +57,17 @@ Puis ouvrir <http://localhost:8000>.
 
 Le site est statique : il suffit de déposer les fichiers (pages `.html` et dossier `assets/`) sur un hébergement, ou d'activer **GitHub Pages** sur la branche `main` (Settings → Pages → Deploy from a branch → `main` / root).
 
-## Mettre à jour la version
+## Numéro de version
 
-Le numéro de version est écrit en dur dans le pied de page de chaque page (`<span>V1.1</span>`). Pour le modifier :
+Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 …).
+
+Le numéro est écrit dans le pied de page de chaque page (`<span>V1.3</span>`). Pour le modifier :
 
 ```bash
-sed -i 's#<span>V1.1</span>#<span>V1.2</span>#' *.html
+sed -i 's#<span>V1.3</span>#<span>V1.4</span>#' *.html
 ```
+
+Puis mettre à jour la ligne « Version actuelle » en haut de ce README.
 
 ## Contact
 
