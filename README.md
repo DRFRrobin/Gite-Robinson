@@ -3,7 +3,7 @@
 Site vitrine des gîtes **La Bouchardière** et **La Bouteillerie** (Gizeux).
 Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de build.
 
-**Version actuelle : V1.3**
+**Version actuelle : V1.5**
 
 ## Pages
 
@@ -15,6 +15,7 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 | `planning.html` | Choix du planning |
 | `planning-bouchardiere.html` | Calendrier et tarifs de la Bouchardière |
 | `planning-bouteillerie.html` | Calendriers et tarifs de la Bouteillerie |
+| `docs/guide-du-site.pdf` | Guide complet du site (fonctionnement, modification, mise en ligne) |
 
 ## Structure
 
@@ -59,12 +60,12 @@ Le site est statique : il suffit de déposer les fichiers (pages `.html` et doss
 
 ## Numéro de version
 
-Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 …).
+Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 → V1.4 → V1.5 …).
 
-Le numéro est écrit dans le pied de page de chaque page (`<span>V1.3</span>`). Pour le modifier :
+Le numéro est écrit dans le pied de page de chaque page (`<span>V1.5</span>`). Pour le modifier :
 
 ```bash
-sed -i 's#<span>V1.3</span>#<span>V1.4</span>#' *.html
+sed -i 's#<span>V1.5</span>#<span>V1.6</span>#' *.html
 ```
 
 Puis mettre à jour la ligne « Version actuelle » en haut de ce README.

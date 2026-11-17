@@ -6,7 +6,7 @@
   // menu mobile
   var bt=document.querySelector('.burger');
   if(nav&&bt){
-    function setMenu(o){nav.classList.toggle('open',o);bt.setAttribute('aria-expanded',o?'true':'false');}
+    function setMenu(o){nav.classList.toggle('open',o);d.classList.toggle('menu-open',o);bt.setAttribute('aria-expanded',o?'true':'false');}
     bt.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
     nav.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
     addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});

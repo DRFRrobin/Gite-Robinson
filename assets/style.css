@@ -123,10 +123,12 @@ footer p{color:#cfd8c0;margin:0 0 20px}
 .title{padding-top:120px}
 .home-hero{min-height:62vh;padding:0}
 .links{display:contents}
+.links a:first-child{margin-left:40px}
 .burger{display:none}
 html{-webkit-text-size-adjust:100%}
+html,body{overflow-x:clip}
 a,button{-webkit-tap-highlight-color:transparent}
-@media(max-width:900px){
+@media(max-width:1100px){
   /* barre compacte : logo à gauche, bouton menu à droite */
   .nav .wrap{flex-direction:row;justify-content:space-between;align-items:center;min-height:64px;padding:6px 16px;gap:0}
   .nav .brand{position:static;margin:0}
@@ -139,12 +141,15 @@ a,button{-webkit-tap-highlight-color:transparent}
   .nav.open .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
   .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:4px;padding:8px 16px 16px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 30px -22px rgba(24,69,44,.6)}
   .nav.open .links{display:flex;animation:rise .25s both}
-  .links a{display:block;padding:14px 16px;font-size:17px;border-radius:12px;color:var(--ink)}
+  .links a,.links a:first-child{display:block;margin-left:0;padding:14px 16px;font-size:17px;border-radius:12px;color:var(--ink)}
   /* accueil : même barre que les autres pages */
   .home .nav{position:sticky;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .home .nav .links a{color:var(--ink)}
   .home .nav .links a:hover{background:var(--line);color:var(--ink)}
   .home .nav .links a[aria-current=page]{background:var(--accent);color:var(--accent-ink)}
+  .title{padding-top:40px}
+}
+@media(max-width:900px){
   .home-hero{min-height:240px}
   .home .cards{margin-top:-40px;gap:18px}
   .title{padding-top:32px}
@@ -162,8 +167,9 @@ a,button{-webkit-tap-highlight-color:transparent}
   .video{margin-bottom:48px;border-radius:12px}
   footer{padding:40px 0 32px}
   .legal{margin-top:28px}
+
 }
-@supports(padding:max(0px)){@media(max-width:900px){.nav .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}}}
+@supports(padding:max(0px)){@media(max-width:1100px){.nav .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}}}
 @media(prefers-reduced-motion:reduce){.nav .brand img{transition:none}}
 
 /* Bouteillerie : maison / studio */
@@ -182,3 +188,36 @@ h2.sec{scroll-margin-top:110px}
 .plan-head img{width:104px;height:72px;object-fit:cover;border-radius:12px;box-shadow:var(--shadow);flex:none}
 .plan-head h2.sec{margin:0}
 @media(max-width:900px){.plancards{margin:28px 0 56px;gap:18px}.plan-head{margin-top:28px;gap:12px}.plan-head img{width:84px;height:58px}}
+
+/* ---------- Correctifs d'interface ---------- */
+/* Accueil (ordinateur) : le menu reste accessible au défilement */
+@media(min-width:1101px){
+  .home .nav{position:fixed;transition:background .3s,border-color .3s}
+  .home .nav.scrolled{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .home .nav.scrolled .links a{color:var(--muted)}
+  .home .nav.scrolled .links a:hover{background:var(--line);color:var(--ink)}
+  .home .nav.scrolled .links a[aria-current=page]{background:var(--accent);color:var(--accent-ink)}
+}
+/* Repère de focus visible au clavier */
+a:focus-visible,button:focus-visible{outline:3px solid var(--olive);outline-offset:3px}
+.nav a:focus-visible,.burger:focus-visible{outline-color:var(--accent)}
+footer a:focus-visible{outline-color:var(--olive)}
+/* Contraste des libellés du pied de page */
+.contact small{color:#bccd84}
+/* Encoche / barre d'accueil des téléphones */
+footer{padding-bottom:max(32px,env(safe-area-inset-bottom))}
+@media(max-width:1100px){html.menu-open body::after{content:"";position:fixed;inset:0;z-index:5;background:rgba(24,69,44,.28)}}
+
+/* ---------- Menu fluide (ordinateur) : la police et les boutons grandissent avec la largeur ---------- */
+@media(min-width:1101px){
+  /* hauteur du bandeau verrouillée : 76 px quelle que soit la taille des boutons */
+  .nav .wrap{height:76px;min-height:76px;padding-top:0;padding-bottom:0;flex-wrap:nowrap;justify-content:flex-start;box-sizing:border-box;
+    max-width:clamp(1080px,calc(1080px + (100vw - 1280px) * .5),1500px)}
+  /* le logo reste aligné sur la colonne de contenu */
+  .nav .brand{left:calc((100% - 1080px) / 2 + 20px)}
+  .links a{font-size:clamp(15px,calc(15px + (100vw - 1100px) * .0085),22px);line-height:1.2;padding:.62em 1.1em;white-space:nowrap}
+  /* place réservée au logo (marge 20 + largeur 178 + respiration 34) */
+  .links a:first-child{margin-left:calc((100% - 1080px) / 2 + 232px)}
+}
+/* Tablette / téléphone : le menu déroulant grandit un peu aussi */
+@media(max-width:1100px){.links a,.links a:first-child{font-size:clamp(17px,1.6vw + 7px,22px)}}
