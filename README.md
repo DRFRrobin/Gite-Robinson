@@ -11,7 +11,7 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 | --- | --- |
 | `index.html` | Accueil : photo, accès aux deux gîtes |
 | `bouchardiere.html` | Gîte de la Bouchardière (description, visite 360, planning, vidéo YouTube) |
-| `bouteillerie.html` | Gîte de la Bouteillerie (description, visite 360, planning) |
+| `bouteillerie.html` | Gîte de la Bouteillerie : la maison et le studio (description, visite 360, planning) |
 | `planning.html` | Choix du planning |
 | `planning-bouchardiere.html` | Calendrier et tarifs de la Bouchardière |
 | `planning-bouteillerie.html` | Calendriers et tarifs de la Bouteillerie |
@@ -25,7 +25,7 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 │   ├── style.css       styles (couleurs, typographie, animations, transitions)
 │   ├── main.js         animations d'apparition et logo réduit au défilement
 │   ├── logo-contour.png  logo détouré avec contour crème
-│   ├── bouchardiere.jpg / bouteillerie.jpg   photos principales
+│   ├── bouchardiere.jpg / bouteillerie.jpg / studio.jpg   photos principales
 └── designs/            anciennes propositions de design (archives)
 ```
 
