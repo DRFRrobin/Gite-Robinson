@@ -207,3 +207,17 @@ footer a:focus-visible{outline-color:var(--olive)}
 /* Encoche / barre d'accueil des téléphones */
 footer{padding-bottom:max(32px,env(safe-area-inset-bottom))}
 @media(max-width:1100px){html.menu-open body::after{content:"";position:fixed;inset:0;z-index:5;background:rgba(24,69,44,.28)}}
+
+/* ---------- Menu fluide (ordinateur) : la police et les boutons grandissent avec la largeur ---------- */
+@media(min-width:1101px){
+  /* hauteur du bandeau verrouillée : 76 px quelle que soit la taille des boutons */
+  .nav .wrap{height:76px;min-height:76px;padding-top:0;padding-bottom:0;flex-wrap:nowrap;justify-content:flex-start;box-sizing:border-box;
+    max-width:clamp(1080px,calc(1080px + (100vw - 1280px) * .5),1500px)}
+  /* le logo reste aligné sur la colonne de contenu */
+  .nav .brand{left:calc((100% - 1080px) / 2 + 20px)}
+  .links a{font-size:clamp(15px,calc(15px + (100vw - 1100px) * .0085),22px);line-height:1.2;padding:.62em 1.1em;white-space:nowrap}
+  /* place réservée au logo (marge 20 + largeur 178 + respiration 34) */
+  .links a:first-child{margin-left:calc((100% - 1080px) / 2 + 232px)}
+}
+/* Tablette / téléphone : le menu déroulant grandit un peu aussi */
+@media(max-width:1100px){.links a,.links a:first-child{font-size:clamp(17px,1.6vw + 7px,22px)}}
