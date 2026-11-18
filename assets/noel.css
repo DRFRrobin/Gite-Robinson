@@ -34,15 +34,15 @@ html.noel body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-even
    radial-gradient(ellipse 55% 45% at 0 40%,rgba(255,213,79,.12),transparent 70%),
    linear-gradient(180deg,#0a1b3d 0%,#0b3144 48%,#0b3b2a 100%)}
 .noel-snow{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none}
-.noel-sleigh{position:fixed;left:0;z-index:-1;pointer-events:none;filter:blur(1.3px);opacity:0;will-change:transform}
+.noel-sleigh{position:fixed;left:0;z-index:-1;pointer-events:none;opacity:0;will-change:transform,opacity}
 
 /* ---------- Guirlande (en haut de page) ---------- */
-.noel-garland{position:absolute;top:0;left:0;right:0;height:34px;z-index:30;pointer-events:none;overflow:hidden}
+.noel-garland{contain:strict;position:absolute;top:0;left:0;right:0;height:34px;z-index:30;pointer-events:none;overflow:hidden}
 .noel-garland svg{position:absolute;inset:0}
 .noel-garland .b{position:absolute;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;background:var(--c);
-  box-shadow:0 0 5px 2px var(--c);animation:noel-tw 1.9s ease-in-out infinite}
+  box-shadow:0 0 5px 2px var(--c);animation:noel-tw 1.9s ease-in-out infinite;will-change:opacity}
 .noel-garland .b::before{content:"";position:absolute;left:1.5px;top:-3px;width:4px;height:3.5px;border-radius:1px;background:#2d5a3f}
-@keyframes noel-tw{0%,100%{opacity:1;box-shadow:0 0 5px 2px var(--c)}50%{opacity:.55;box-shadow:0 0 1px 0 var(--c)}}
+@keyframes noel-tw{0%,100%{opacity:1}50%{opacity:.5}}
 html.noel-still .noel-garland .b{animation:none;opacity:.9}
 
 /* ---------- Typographie : Playfair (titres) + Inter (texte) ---------- */
@@ -55,8 +55,8 @@ html.noel .text p.note{color:var(--muted)}
 html.noel footer h3{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;color:#ffd54f;font-size:1.4rem}
 
 /* ---------- Barre de navigation : dégradé sapin, liseré or ---------- */
-html.noel .nav,html.noel body.home .nav.scrolled{background:linear-gradient(180deg,rgba(20,66,48,.78),rgba(10,38,28,.82));
-  border-bottom:1px solid rgba(255,213,79,.4);backdrop-filter:blur(14px)}
+html.noel .nav,html.noel body.home .nav.scrolled{background:linear-gradient(180deg,rgba(20,66,48,.94),rgba(10,38,28,.96));
+  border-bottom:1px solid rgba(255,213,79,.4);backdrop-filter:none}
 html.noel .links a{color:var(--muted);font-family:'Inter',sans-serif;font-weight:600;text-transform:none;letter-spacing:.01em}
 html.noel .links a:hover{color:#fff;background:rgba(255,248,225,.12)}
 html.noel .nav a[aria-current=page],html.noel body.home .nav a[aria-current=page],html.noel body.home .nav.scrolled .links a[aria-current=page]{

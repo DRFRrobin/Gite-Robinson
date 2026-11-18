@@ -61,9 +61,9 @@
     var ctx = cv.getContext('2d'), W, H, flakes = [], stars = [], wind = 0, windT = 0, last = 0, raf = 0;
     function setup() {
       W = root.clientWidth; H = window.innerHeight;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var dpr = 1;
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var n = Math.round(Math.min(110, Math.max(40, W * H / 9000)));
+      var n = Math.round(Math.min(70, Math.max(30, W * H / 16000)));
       flakes = []; for (var i = 0; i < n; i++) {
         var r = 0.8 + Math.pow(Math.random(), 1.6) * 2.6;
         flakes.push({ x: Math.random() * W, y: Math.random() * H, r: r, v: 0.25 + (r - 0.8) / 2.6 * 1.1, ph: Math.random() * 6.28, o: Math.min(0.95, 0.35 + Math.random() * 0.6) });
@@ -84,11 +84,15 @@
       flakes.forEach(function (f) {
         if (dt) { f.y += f.v * dt; f.ph += 0.012 * dt; f.x += Math.sin(f.ph) * 0.35 * dt + wind * (0.4 + f.r * 0.25) * dt;
           if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; } if (f.x > W + 4) f.x = -4; else if (f.x < -4) f.x = W + 4; }
-        ctx.globalAlpha = f.o; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
       });
+      for (var b = 0; b < 3; b++) { // 3 passes (une par palier d'opacité) au lieu d'un tracé par flocon
+        ctx.globalAlpha = 0.45 + b * 0.25; ctx.beginPath();
+        flakes.forEach(function (f) { if (Math.min(2, Math.floor((f.o - 0.35) / 0.2)) === b) { ctx.moveTo(f.x + f.r, f.y); ctx.arc(f.x, f.y, f.r, 0, 6.283); } });
+        ctx.fill();
+      }
       ctx.globalAlpha = 1;
     }
-    function loop(t) { var dt = last ? Math.min(3, (t - last) / 16.7) : 1; last = t; draw(t, dt); raf = requestAnimationFrame(loop); }
+    function loop(t) { raf = requestAnimationFrame(loop); if (last && t - last < 30) return; var dt = last ? Math.min(4, (t - last) / 16.7) : 1; last = t; draw(t, dt); } // ~30 images/s
     function run() { if (!raf && !still) { last = 0; raf = requestAnimationFrame(loop); } }
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     function vis() { document.hidden ? stop() : run(); }
