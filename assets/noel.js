@@ -1,11 +1,31 @@
-/* Thème de Noël : activation manuelle (bouton à côté du numéro de version).
-   Le choix est mémorisé dans le navigateur (localStorage). Tout est désactivé si l'appareil réduit les animations. */
+/* Thème de Noël : bouton à côté du numéro de version, mémorisation du choix, activation automatique en décembre.
+   Tout est figé si l'appareil réduit les animations. */
 (function () {
   var KEY = 'gite-theme', root = document.documentElement;
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fx = null; // éléments et minuteurs actifs
 
-  function save(on) { try { on ? localStorage.setItem(KEY, 'noel') : localStorage.removeItem(KEY); } catch (e) {} }
+  /* ---------- Mémoire du choix ----------
+     « noel » = activé à la main · « off-ANNÉE » = désactivé à la main cette année-là.
+     Sans choix, le thème est actif par défaut du 1er au 26 décembre (inclus), tous les ans. */
+  function inSeason(d) { return d.getMonth() === 11 && d.getDate() <= 26; }
+  function readPref() {
+    var v = null;
+    try { v = localStorage.getItem(KEY); } catch (e) {}
+    if (!v) { var m = document.cookie.match(/(?:^|; )gite-theme=([^;]+)/); v = m && m[1]; } // secours si localStorage est bloqué
+    return v;
+  }
+  function writePref(v) {
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+    try { document.cookie = KEY + '=' + v + ';max-age=31536000;path=/;SameSite=Lax'; } catch (e) {}
+  }
+  function wanted() {
+    var v = readPref(), n = new Date();
+    if (v === 'noel') return true;
+    if (v === 'off-' + n.getFullYear()) return false;
+    return inSeason(n);
+  }
+
   function el(tag, cls, parent) { var e = document.createElement(tag); if (cls) e.className = cls; (parent || document.body).appendChild(e); return e; }
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
@@ -39,7 +59,7 @@
   function startSnow(state) {
     var cv = el('canvas', 'noel-snow'); cv.setAttribute('aria-hidden', 'true');
     var ctx = cv.getContext('2d'), W, H, flakes = [], stars = [], wind = 0, windT = 0, last = 0, raf = 0;
-    function init() {
+    function setup() {
       W = root.clientWidth; H = window.innerHeight;
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -73,8 +93,8 @@
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     function vis() { document.hidden ? stop() : run(); }
     function mouse(e) { windT = (e.clientX / W - 0.5) * 1.2; }
-    var rt; function rs() { clearTimeout(rt); rt = setTimeout(function () { init(); if (still) draw(0, 0); }, 150); }
-    init(); if (still) draw(0, 0); else run();
+    var rt; function rs() { clearTimeout(rt); rt = setTimeout(function () { setup(); if (still) draw(0, 0); }, 150); }
+    setup(); if (still) draw(0, 0); else run();
     document.addEventListener('visibilitychange', vis); window.addEventListener('resize', rs); window.addEventListener('mousemove', mouse, { passive: true });
     state.undo.push(function () { stop(); document.removeEventListener('visibilitychange', vis); window.removeEventListener('resize', rs); window.removeEventListener('mousemove', mouse); clearTimeout(rt); cv.remove(); });
   }
@@ -100,14 +120,36 @@
     state.undo.push(function () { clearTimeout(timer); if (state.cur) state.cur.remove(); document.querySelectorAll('.noel-sleigh').forEach(function (n) { n.remove(); }); });
   }
 
-  /* ---------- Décor de confiserie posé sur la neige du pied de page ---------- */
+  /* ---------- Décor de confiserie posé sur la neige du pied de page ----------
+     Le profil de la neige (SURF, unités du dessin 1200 x 60, pas de 10) permet de poser chaque objet sur le relief réel,
+     enfoncé de quelques pixels, quelle que soit la largeur de l'écran. */
+  var SURF = [26.0,24.1,22.3,20.6,19.1,17.7,16.4,15.3,14.3,13.3,12.5,11.8,11.2,10.8,10.4,10.1,9.9,9.8,9.7,9.8,10.0,10.2,10.5,10.9,11.4,11.9,12.5,13.2,13.9,14.7,15.6,16.5,17.5,18.5,19.6,20.8,22.0,23.2,24.5,25.6,26.6,27.7,28.7,29.8,30.7,31.6,32.4,33.2,33.9,34.6,35.2,35.8,36.3,36.8,37.2,37.5,37.8,38.0,38.1,38.2,38.3,38.2,38.1,38.0,37.8,37.5,37.1,36.7,36.2,35.7,35.1,34.4,33.7,32.8,32.0,31.1,30.2,29.0,28.0,26.9,25.8,24.8,23.7,22.6,21.6,20.7,19.8,18.9,17.9,17.1,16.4,15.6,14.9,14.3,13.6,13.0,12.5,12.0,11.6,11.2,10.9,10.7,10.5,10.4,10.3,10.3,10.3,10.4,10.6,10.9,11.2,11.6,12.0,12.6,13.1,13.8,14.5,15.3,16.1,17.0,18.0];
+  var STRIP_H = 46, STRIP_TOP = -43; // bande de neige : 46 px de haut, son haut est à 43 px au-dessus du pied de page
+  var ITEMS = [ // [image, classe, largeur, hauteur/largeur, position (0 à 1), enfoncement px, visible sur petit écran]
+    ['cane', 'cane', 32, 50 / 26, 0.02, 5, 1], ['lollipop', 'lol', 25, 41 / 20, 0.17, 5, 1], ['bonbon', 'bon', 34, 16 / 26, 0.33, 3, 0],
+    ['house', 'house', 92, 62 / 72, 0.50, 4, 1], ['bonbon', 'bon', 34, 16 / 26, 0.67, 3, 0], ['lollipop', 'lol', 25, 41 / 20, 0.83, 5, 1], ['cane', 'cane flip', 32, 50 / 26, 0.98, 5, 1]];
+  function surfaceY(xpx, W) { // hauteur de la neige (px, repère du pied de page) à l'abscisse xpx
+    var u = Math.max(0, Math.min(1200, xpx / W * 1200)) / 10, i = Math.floor(u), f = u - i, y = SURF[i] + (SURF[Math.min(i + 1, 120)] - SURF[i]) * f;
+    return STRIP_TOP + y * STRIP_H / 60;
+  }
+  function placeDecor(d, f) {
+    var W = f.clientWidth, small = W < 700, k = small ? 0.75 : 1, colW = Math.min(1080, W) - 40, x0 = (W - Math.min(1080, W)) / 2 + 20;
+    d.innerHTML = '';
+    ITEMS.forEach(function (it) {
+      if (small && !it[6]) return;
+      var w = it[2] * k, h = w * it[3], cx = x0 + it[4] * colW, left = Math.max(0, Math.min(W - w, cx - w / 2));
+      var low = -1e9; for (var s = 0; s <= 4; s++) low = Math.max(low, surfaceY(left + w * s / 4, W)); // point le plus bas de la neige sous l'objet
+      var i = el('img', it[1], d); i.src = 'assets/noel/' + it[0] + '.svg'; i.alt = '';
+      i.style.cssText = 'width:' + w + 'px;left:' + left.toFixed(1) + 'px;top:' + (low + it[5] - h).toFixed(1) + 'px';
+    });
+  }
   function buildDecor(state) {
     var f = document.querySelector('footer'); if (!f) return;
-    var d = el('div', 'noel-decor', f); d.setAttribute('aria-hidden', 'true');
-    [['cane', 'cane'], ['lollipop', 'lol'], ['bonbon', 'bon hide-s'], ['house', 'house'], ['bonbon', 'bon hide-s'], ['lollipop', 'lol hide-s'], ['cane', 'cane flip']].forEach(function (it) {
-      var i = el('img', it[1], d); i.src = 'assets/noel/' + it[0] + '.svg'; i.alt = '';
-    });
-    state.undo.push(function () { d.remove(); });
+    var d = el('div', 'noel-decor', f); d.setAttribute('aria-hidden', 'true'); placeDecor(d, f);
+    var w0 = f.clientWidth, rt;
+    function rs() { clearTimeout(rt); rt = setTimeout(function () { if (f.clientWidth !== w0) { w0 = f.clientWidth; placeDecor(d, f); } }, 150); }
+    window.addEventListener('resize', rs);
+    state.undo.push(function () { window.removeEventListener('resize', rs); clearTimeout(rt); d.remove(); });
   }
 
   /* ---------- Activation / désactivation ---------- */
@@ -135,9 +177,14 @@
   }
   function init() {
     var btn = document.querySelector('.noel-btn');
-    var saved = false; try { saved = localStorage.getItem(KEY) === 'noel'; } catch (e) {}
-    if (saved) on();
-    if (btn) { sync(btn); btn.addEventListener('click', function () { if (fx) { off(); save(false); } else { on(); save(true); } sync(btn); }); }
+    if (wanted()) on();
+    if (btn) {
+      sync(btn);
+      btn.addEventListener('click', function () {
+        if (fx) { off(); writePref('off-' + new Date().getFullYear()); } else { on(); writePref('noel'); }
+        sync(btn);
+      });
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

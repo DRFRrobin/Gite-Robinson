@@ -77,8 +77,10 @@ html.noel body.home .nav.scrolled .links a{color:var(--muted)}
   html.noel .links a,html.noel body.home .links a{color:#fff8e1}
   html.noel .nav .brand{position:relative;left:0;top:0}
 }
-/* logo : bonnet de Père Noël */
-html.noel .nav .brand::after{content:"";position:absolute;top:-7%;right:-8%;width:46%;aspect-ratio:1;background:url(noel/hat.svg) center/contain no-repeat;transform:rotate(7deg);pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+/* logo : bonnet de Père Noël, posé sur le haut du badge (centre 49,9 % / 46 %, rayon 33,9 % de la largeur du logo),
+   le bord blanc suit la courbe du cercle à environ 38° à droite de la verticale */
+html.noel .nav .brand::after{content:"";position:absolute;left:49.8%;top:-20.3%;width:42%;aspect-ratio:1;background:url(noel/hat.svg) center/contain no-repeat;
+  transform-origin:48% 71.5%;transform:rotate(34deg);pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 
 /* ---------- Accueil ---------- */
 html.noel .home-hero{background:linear-gradient(rgba(10,27,61,.5),rgba(11,59,42,.82)),url(bouchardiere.jpg) center 40%/cover}
@@ -116,12 +118,9 @@ html.noel .contact a{color:#fff8e1}
 html.noel .legal{border-top-color:rgba(255,213,79,.28);color:var(--muted)}
 html.noel footer::before{content:"";position:absolute;left:0;right:0;bottom:calc(100% - 3px);height:46px;z-index:3;pointer-events:none;
   background:url(noel/hills-front.svg) center bottom/100% 100% no-repeat,url(noel/hills-back.svg) center bottom/100% 100% no-repeat}
-.noel-decor{position:absolute;left:50%;bottom:calc(100% + 19px);transform:translateX(-50%);width:min(1080px,100%);padding:0 20px;box-sizing:border-box;
-  display:flex;justify-content:space-between;align-items:flex-end;z-index:2;pointer-events:none}
-.noel-decor img{display:block;height:auto}
-.noel-decor .cane{width:32px}.noel-decor .lol{width:25px}.noel-decor .bon{width:34px;margin-bottom:6px}.noel-decor .house{width:92px}
+.noel-decor{position:absolute;left:0;right:0;top:0;height:0;z-index:2;pointer-events:none}
+.noel-decor img{position:absolute;display:block;height:auto}
 .noel-decor .flip{transform:scaleX(-1)}
-@media(max-width:700px){.noel-decor{padding:0 12px}.noel-decor .cane{width:24px}.noel-decor .lol{width:19px}.noel-decor .house{width:68px}.noel-decor .hide-s{display:none}}
 
 /* place réservée au décor de confiserie au-dessus du pied de page */
 html.noel main.wrap{padding-bottom:124px}
