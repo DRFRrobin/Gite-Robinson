@@ -1,0 +1,129 @@
+/* =====================================================================
+   Thème de Noël — d'après la charte graphique « Thème Noël » (C02)
+   Actif uniquement quand <html> porte la classe .noel
+   Nuit (fonds) · sapin (surfaces) · rouge Noël (actions) · or (détails) · crème (texte)
+   ===================================================================== */
+
+/* ---------- Bouton d'activation (à côté du numéro de version) ---------- */
+.legal{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.noel-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;border-radius:50%;
+  border:1px solid rgba(249,243,227,.32);background:transparent;color:#cfd8c0;cursor:pointer;transition:color .25s,border-color .25s,box-shadow .25s,background .25s}
+.noel-btn svg{width:17px;height:17px;display:block}
+.noel-btn:hover{color:#fff;border-color:rgba(249,243,227,.7)}
+.noel-btn[aria-pressed=true]{color:#ffd54f;border-color:rgba(255,213,79,.8);background:rgba(255,213,79,.12);box-shadow:0 0 12px rgba(255,213,79,.45)}
+
+/* ---------- Palette ---------- */
+html.noel{
+  --bg:#0a1b3d;--surface:rgba(20,66,48,.78);--ink:#fff8e1;--muted:rgba(255,248,225,.74);
+  --accent:#e53935;--accent-ink:#fff;--line:rgba(255,213,79,.24);--olive:#ffd54f;
+  --radius:18px;--shadow:0 8px 16px rgba(0,0,0,.45);
+  --or:#ffd54f;--rouge:#e53935;--nuit:#0a1b3d;--sapin:#0b3b2a;
+  background:#0a1b3d;color-scheme:dark;
+}
+html.noel body{background:transparent;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16.5px;line-height:1.6;padding-top:34px}
+
+/* ---------- Fond du ciel : dégradé nuit → sarcelle → sapin, lueurs, étoiles fixes, lune ---------- */
+html.noel body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(circle at 86% 21%,#fffbe6 0 13px,rgba(255,251,230,.38) 14px,rgba(255,251,230,.1) 40px,transparent 78px),
+   radial-gradient(1.5px 1.5px at 12% 18%,#fff 98%,transparent),radial-gradient(1.2px 1.2px at 27% 9%,#fff 98%,transparent),
+   radial-gradient(1.8px 1.8px at 41% 26%,#fff 98%,transparent),radial-gradient(1.3px 1.3px at 58% 12%,#fff 98%,transparent),
+   radial-gradient(1.5px 1.5px at 69% 31%,#fff 98%,transparent),radial-gradient(1.2px 1.2px at 7% 39%,#fff 98%,transparent),
+   radial-gradient(1.6px 1.6px at 93% 44%,#fff 98%,transparent),radial-gradient(1.3px 1.3px at 49% 47%,#fff 98%,transparent),
+   radial-gradient(ellipse 60% 40% at 100% 0,rgba(229,57,53,.38),transparent 70%),
+   radial-gradient(ellipse 55% 45% at 0 40%,rgba(255,213,79,.12),transparent 70%),
+   linear-gradient(180deg,#0a1b3d 0%,#0b3144 48%,#0b3b2a 100%)}
+.noel-snow{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none}
+.noel-sleigh{position:fixed;left:0;z-index:-1;pointer-events:none;filter:blur(1.3px);opacity:0;will-change:transform}
+
+/* ---------- Guirlande (en haut de page) ---------- */
+.noel-garland{position:absolute;top:0;left:0;right:0;height:34px;z-index:30;pointer-events:none;overflow:hidden}
+.noel-garland svg{position:absolute;inset:0}
+.noel-garland .b{position:absolute;width:7px;height:11px;margin-left:-3.5px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;background:var(--c);
+  box-shadow:0 0 5px 2px var(--c);animation:noel-tw 1.9s ease-in-out infinite}
+.noel-garland .b::before{content:"";position:absolute;left:1.5px;top:-3px;width:4px;height:3.5px;border-radius:1px;background:#2d5a3f}
+@keyframes noel-tw{0%,100%{opacity:1;box-shadow:0 0 5px 2px var(--c)}50%{opacity:.55;box-shadow:0 0 1px 0 var(--c)}}
+html.noel-still .noel-garland .b{animation:none;opacity:.9}
+
+/* ---------- Typographie : Playfair (titres) + Inter (texte) ---------- */
+html.noel h1,html.noel h2,html.noel h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;text-transform:none;letter-spacing:-.5px;line-height:1.15}
+html.noel .title h1{color:#e53935;font-size:clamp(2.1rem,5vw,3.3rem)}
+html.noel .title hr{border-top-color:#ffd54f;width:64px;border-top-width:2px;opacity:.9}
+html.noel h2.sec,html.noel .text h2.sec{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;color:#ffd54f;font-size:clamp(1.25rem,2vw,1.55rem)}
+html.noel .text p.lead{font-size:1.05rem}
+html.noel .text p.note{color:var(--muted)}
+html.noel footer h3{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;color:#ffd54f;font-size:1.4rem}
+
+/* ---------- Barre de navigation : dégradé sapin, liseré or ---------- */
+html.noel .nav,html.noel body.home .nav.scrolled{background:linear-gradient(180deg,rgba(20,66,48,.78),rgba(10,38,28,.82));
+  border-bottom:1px solid rgba(255,213,79,.4);backdrop-filter:blur(14px)}
+html.noel .links a{color:var(--muted);font-family:'Inter',sans-serif;font-weight:600;text-transform:none;letter-spacing:.01em}
+html.noel .links a:hover{color:#fff;background:rgba(255,248,225,.12)}
+html.noel .nav a[aria-current=page],html.noel body.home .nav a[aria-current=page],html.noel body.home .nav.scrolled .links a[aria-current=page]{
+  color:#fff;background:linear-gradient(180deg,#ef5350,#b71c1c);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 4px 12px rgba(198,40,40,.45)}
+html.noel .nav a:focus-visible,html.noel .burger:focus-visible,html.noel a:focus-visible,html.noel button:focus-visible{outline-color:#ffd54f}
+html.noel .burger span{background:#fff8e1}
+html.noel body.home .nav{background:transparent;border-bottom:0;backdrop-filter:none}
+html.noel body.home .links a{color:#fff8e1}
+html.noel body.home .nav.scrolled .links a{color:var(--muted)}
+/* le menu de l'accueil (fixe sur ordinateur) glisse sous la guirlande, puis remonte */
+@media(min-width:1101px){
+  html.noel body.home .nav{top:34px}
+  html.noel body.home .nav.scrolled{top:0}
+}
+@media(max-width:1100px){
+  html.noel body.home .nav{background:linear-gradient(180deg,rgba(20,66,48,.9),rgba(10,38,28,.92));border-bottom:1px solid rgba(255,213,79,.4)}
+  html.noel .links{background:#0a2a22;border-bottom:1px solid rgba(255,213,79,.4);box-shadow:0 24px 30px -22px rgba(0,0,0,.7)}
+  html.noel .links a,html.noel body.home .links a{color:#fff8e1}
+  html.noel .nav .brand{position:relative;left:0;top:0}
+}
+/* logo : bonnet de Père Noël, posé sur le haut du badge (centre 49,9 % / 46 %, rayon 33,9 % de la largeur du logo),
+   le bord blanc suit la courbe du cercle à environ 38° à droite de la verticale */
+html.noel .nav .brand::after{content:"";position:absolute;left:49.8%;top:-20.3%;width:42%;aspect-ratio:1;background:url(noel/hat.svg) center/contain no-repeat;
+  transform-origin:48% 71.5%;transform:rotate(34deg);pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+
+/* ---------- Accueil ---------- */
+html.noel .home-hero{background:linear-gradient(rgba(10,27,61,.5),rgba(11,59,42,.82)),url(bouchardiere.jpg) center 40%/cover}
+html.noel .card{box-shadow:inset 0 0 0 1.5px rgba(255,213,79,.55),0 8px 16px rgba(0,0,0,.45)}
+html.noel .card::before{background:linear-gradient(180deg,transparent 35%,rgba(10,27,61,.88))}
+html.noel .card span{font:600 clamp(1.4rem,2.2vw,1.8rem)/1.15 'Playfair Display',Georgia,serif;text-transform:none;letter-spacing:-.4px;color:#fff8e1}
+
+/* ---------- Pages gîtes ---------- */
+html.noel .photo img{box-shadow:inset 0 0 0 1.5px rgba(255,213,79,.55),0 8px 16px rgba(0,0,0,.45);outline:1.5px solid rgba(255,213,79,.55);outline-offset:-1.5px}
+html.noel .features li{border-bottom-color:rgba(255,213,79,.22)}
+html.noel .features li::before{background:#ffd54f;border-radius:50%;width:8px;height:8px;top:20px;left:5px;box-shadow:0 0 8px rgba(255,213,79,.6)}
+html.noel .video{box-shadow:0 0 0 1.5px rgba(255,213,79,.55),0 8px 16px rgba(0,0,0,.45)}
+
+/* ---------- Boutons : rouge Noël = actions ---------- */
+html.noel .btn{font-family:'Inter',sans-serif;font-weight:600;text-transform:none;letter-spacing:.01em;color:#fff;border:1.5px solid rgba(255,213,79,.55);background:transparent}
+html.noel .btn.primary,html.noel .btn:hover,html.noel .pcard:hover{color:#fff}
+html.noel .btn.primary,html.noel .btn:hover{background:linear-gradient(180deg,#ef5350,#c62828);border-color:transparent;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 8px 18px rgba(198,40,40,.5)}
+html.noel .btn:hover{transform:translateY(-2px)}
+
+/* ---------- Plannings ---------- */
+html.noel .plan{background:#fff8e1;border-color:rgba(255,213,79,.5);box-shadow:0 8px 16px rgba(0,0,0,.45)}
+html.noel .pcard{color:#fff8e1;background:linear-gradient(180deg,rgba(30,92,64,.55),rgba(12,44,32,.55));border:1px solid rgba(255,213,79,.4);box-shadow:0 8px 16px rgba(0,0,0,.45)}
+html.noel .pcard span{font:600 1.25rem/1.25 'Playfair Display',Georgia,serif;text-transform:none;letter-spacing:-.2px}
+html.noel .plan-head img{box-shadow:0 0 0 1.5px rgba(255,213,79,.55),0 6px 12px rgba(0,0,0,.4)}
+
+/* ---------- Pied de page = « barre » sapin, avec neige épaisse et confiserie ---------- */
+html.noel footer{position:relative;z-index:1;margin-top:0;color:#fff8e1;border:0;border-top:1px solid rgba(255,213,79,.4);
+  background:linear-gradient(180deg,#14422f,#0a261c);padding-bottom:max(32px,env(safe-area-inset-bottom))}
+html.noel footer p{color:var(--muted)}
+html.noel .contact li{background:rgba(255,248,225,.08);border:1px solid rgba(255,213,79,.3);box-shadow:none}
+html.noel .contact small{color:#ffd54f;font-size:.72rem;letter-spacing:.03em}
+html.noel .contact a:hover{color:#ffd54f}
+html.noel .contact a{color:#fff8e1}
+html.noel .legal{border-top-color:rgba(255,213,79,.28);color:var(--muted)}
+html.noel footer::before{content:"";position:absolute;left:0;right:0;bottom:calc(100% - 3px);height:46px;z-index:3;pointer-events:none;
+  background:url(noel/hills-front.svg) center bottom/100% 100% no-repeat,url(noel/hills-back.svg) center bottom/100% 100% no-repeat}
+.noel-decor{position:absolute;left:0;right:0;top:0;height:0;z-index:2;pointer-events:none}
+.noel-decor img{position:absolute;display:block;height:auto}
+.noel-decor .flip{transform:scaleX(-1)}
+
+/* place réservée au décor de confiserie au-dessus du pied de page */
+html.noel main.wrap{padding-bottom:124px}
+html.noel .actions,html.noel .video{margin-bottom:0}
+html.noel body.home main.wrap{padding-bottom:32px}
+@media(max-width:700px){html.noel main.wrap{padding-bottom:92px}html.noel body.home main.wrap{padding-bottom:28px}}
