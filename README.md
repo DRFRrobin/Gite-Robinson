@@ -3,7 +3,7 @@
 Site vitrine des gîtes **La Bouchardière** et **La Bouteillerie** (Gizeux).
 Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de build.
 
-**Version actuelle : V1.5**
+**Version actuelle : V1.6**
 
 ## Pages
 
@@ -25,6 +25,7 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 ├── assets/
 │   ├── style.css       styles (couleurs, typographie, animations, transitions)
 │   ├── main.js         animations d'apparition et logo réduit au défilement
+│   ├── noel.css / noel.js / noel/   thème de Noël (activable par un bouton)
 │   ├── logo-contour.png  logo détouré avec contour crème
 │   ├── bouchardiere.jpg / bouteillerie.jpg / studio.jpg   photos principales
 └── designs/            anciennes propositions de design (archives)
@@ -37,6 +38,16 @@ Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de b
 - Les couleurs et dimensions sont des variables CSS en haut de `assets/style.css`.
 - Animations désactivées automatiquement si l'appareil est réglé sur « réduire les animations ».
 - Transitions entre pages : View Transitions (Chrome, Edge, Safari récents ; sans effet ailleurs).
+
+## Thème de Noël
+
+Thème saisonnier d'après la charte graphique « Thème Noël » : ciel de nuit étoilé et lune, guirlande qui scintille, neige qui tombe, neige épaisse avec décor de confiserie au-dessus du pied de page, bonnet de Père Noël sur le logo, traîneau qui traverse le ciel de temps en temps.
+
+- **Activation à la main** : petit bouton arbre à côté du numéro de version, en bas de chaque page. Le choix est mémorisé dans le navigateur du visiteur (`localStorage`, clé `gite-theme`) et suit d'une page à l'autre.
+- **Fichiers** : `assets/noel.css` (apparence, tout est limité à `html.noel`), `assets/noel.js` (bouton, guirlande, neige, traîneau, décor) et `assets/noel/*.svg` (illustrations).
+- **Palette** : nuit `#0a1b3d`, sapin `#0b3b2a`, rouge Noël `#e53935` (actions et grands titres), or `#ffd54f` (détails), crème `#fff8e1` (texte). Titres en Playfair Display, texte en Inter (chargées seulement quand le thème est actif).
+- **Accessibilité** : si l'appareil réduit les animations, la neige est figée, la guirlande fixe et le traîneau n'apparaît pas. La neige s'arrête quand l'onglet est caché.
+- **Retirer le thème** : supprimer le bouton (`.noel-btn`) et les deux lignes `noel.css` / `noel.js` dans chaque page.
 
 ## Contenus externes
 
@@ -60,12 +71,12 @@ Le site est statique : il suffit de déposer les fichiers (pages `.html` et doss
 
 ## Numéro de version
 
-Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 → V1.4 → V1.5 …).
+Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 → V1.4 → V1.5 → V1.6 …).
 
-Le numéro est écrit dans le pied de page de chaque page (`<span>V1.5</span>`). Pour le modifier :
+Le numéro est écrit dans le pied de page de chaque page (`<span>V1.6</span>`). Pour le modifier :
 
 ```bash
-sed -i 's#<span>V1.5</span>#<span>V1.6</span>#' *.html
+sed -i 's#<span>V1.6</span>#<span>V1.7</span>#' *.html
 ```
 
 Puis mettre à jour la ligne « Version actuelle » en haut de ce README.
