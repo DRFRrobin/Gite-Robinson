@@ -221,3 +221,8 @@ footer{padding-bottom:max(32px,env(safe-area-inset-bottom))}
 }
 /* Tablette / téléphone : le menu déroulant grandit un peu aussi */
 @media(max-width:1100px){.links a,.links a:first-child{font-size:clamp(17px,1.6vw + 7px,22px)}}
+
+/* Calendriers externes réduits à la largeur de l'écran (voir main.js) */
+.plan .fit{margin:0 auto;overflow:hidden}
+.plan .fit iframe{max-width:none;margin:0;transform-origin:0 0}
+@media(max-width:700px){.plan{overflow-x:hidden;padding:8px}}

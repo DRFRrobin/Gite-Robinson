@@ -24,3 +24,25 @@
     io.observe(e);
   });
 })();
+
+/* Plannings : réduit les calendriers externes (largeur fixe) pour qu'ils tiennent en entier dans l'écran. */
+(function () {
+  var fr = [].slice.call(document.querySelectorAll('.plan iframe[width]'));
+  if (!fr.length) return;
+  fr.forEach(function (f) {
+    var w = document.createElement('div'); w.className = 'fit';
+    f.parentNode.insertBefore(w, f); w.appendChild(f);
+    f._w = +f.getAttribute('width'); f._h = +f.getAttribute('height');
+  });
+  function fit() {
+    fr.forEach(function (f) {
+      var box = f.parentNode, plan = box.parentNode, cs = getComputedStyle(plan);
+      var avail = plan.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var s = Math.min(1, avail / f._w);
+      f.style.width = f._w + 'px'; f.style.height = f._h + 'px';
+      f.style.transform = s < 1 ? 'scale(' + s + ')' : '';
+      box.style.height = f._h * s + 'px'; box.style.width = f._w * s + 'px';
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('orientationchange', fit);
+})();
