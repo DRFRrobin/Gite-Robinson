@@ -3,7 +3,7 @@
 Site vitrine des gîtes **La Bouchardière** et **La Bouteillerie** (Gizeux).
 Site statique (HTML / CSS / un peu de JavaScript), sans framework ni étape de build.
 
-**Version actuelle : V1.9**
+**Version actuelle : V2.0**
 
 ## Pages
 
@@ -73,16 +73,16 @@ Le site est statique : il suffit de déposer les fichiers (pages `.html` et doss
 
 ## Numéro de version
 
-Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 → V1.4 → V1.5 → V1.6 → V1.7 → V1.8 → V1.9 …).
+Règle : **à chaque nouvelle version, on ajoute 0,1** (V1.1 → V1.2 → V1.3 → V1.4 → V1.5 → V1.6 → V1.7 → V1.8 → V1.9 → V2.0 …).
 
-Le numéro est écrit dans le pied de page de chaque page (`<span>V1.9</span>`). Pour le modifier :
+Le numéro est écrit dans le pied de page de chaque page (`<span>V2.0</span>`). Pour le modifier :
 
 ```bash
-sed -i 's#<span>V1.9</span>#<span>V2.0</span>#' *.html
+sed -i 's#<span>V2.0</span>#<span>V2.1</span>#' *.html
 ```
 
 Puis mettre à jour la ligne « Version actuelle » en haut de ce README.
 
 ## Contact
 
-gizeux.robin@wanadoo.fr
+drfr.robin@gmail.com
